@@ -21,4 +21,4 @@ Realized Functions:
 6) Use this link(http://localhost:8000/) in your browser Entering the backend management system
 
 # Attention 
-The template file of the project comes from the Internet, and the background file is written by the author himself, If there is infringement, please contact me! Thanks!
+The template file of the project came from the Internet, and the backend was written by the author himself, If there is infringement, please contact me! Thanks!

@@ -1,0 +1,40 @@
+{% extends 'mobile/base.html' %}
+{% load static from staticfiles %}
+
+
+
+{% block mainbody %}
+
+
+<!--内容区-->
+	<article class="main-container">
+
+		<div class="member-header">
+			<button class="button" onclick="location.href='{% url 'mobile_index'%}'"><span class="return"><i></i></span></button>
+			<p> &nbsp; &nbsp;</p>
+			<div class="memberhead"><img src="/static/uploads/member/{{ request.session.mobileuser.avatar }}" alt=""><i class="icon-woman"></i></div>
+			<ul>
+				<li class="line-w"><b> &nbsp; </b><h1>{{ request.session.mobileuser.mobile }}</h1></li>
+			</ul>
+			<div class="waves1 icon-waves"></div>
+			<div class="waves2 icon-waves"></div>
+			<div class="waves3 icon-waves"></div>
+		</div>
+
+		<div class="list">
+			<ul class="line">
+				<li onclick="location.href='{% url 'mobile_member_orders' %}'"><i class="icon-allorders"></i>Mine Orders<span class="icon-arrowright"></span></li>
+			</ul>
+			<ul class="line">
+				<li onclick="#"><i class="icon-head"></i>Mine Info<span class="icon-arrowright"></span></li>
+				<li onclick="#"><i class="icon-pwd"></i>Change Password<span class="icon-arrowright"></span></li>
+				<li onclick="#"><i class="icon-coupons"></i>Discount<span class="icon-arrowright"></span></li>
+				<li onclick="#"><i class="icon-address"></i>Address<span class="icon-arrowright"></span></li>
+			</ul>
+			<ul class="line">
+				<li onclick="location='{% url 'mobile_member_logout'%}'"><i class="icon-out"></i>Logout</li>
+			</ul>
+		</div>
+
+	</article>
+{% endblock %}

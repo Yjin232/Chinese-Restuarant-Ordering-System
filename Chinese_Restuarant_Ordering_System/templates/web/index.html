@@ -1,0 +1,180 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'web/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/css/common.css' %}">
+    <style type="text/css">
+        body{min-height:2000px;padding-top:70px;}
+
+        .navbar-default{background-color:#ff8800;border-color:#e7e7e7;}
+        .navbar-default .navbar-brand{color:#fff;}
+        .navbar-default .navbar-nav > li > a,.navbar-default .navbar-nav > li > a:visited {
+            color: #fff;
+            width:100px;
+            font-size:14px;
+            text-align:center;
+        }
+        .navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:visited,.navbar-default .navbar-nav li a:hover,.navbar-default .navbar-nav > .active > a:hover,.navbar-default .navbar-nav li a:active {
+            color:#fff;
+            background-color: #FF4500;
+            width:100px;
+            font-size:14px;
+            text-align:center;
+        }
+
+        table tr td{font-size:11px;}
+        table tr td.price{color:red;}
+        table tr td.num span{color:red;padding:0px 5px}
+        table tr td.num i{border-width:0px;background-color:#ddd;}
+
+        div.shoplist div.bn{font-size:12px;line-height:25px;}
+        div.shoplist div.bn span.price{color:red;}
+    </style>
+</head>
+<body>
+    <!-- 页头导航开始 -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> <span style="font-weight:bold;">{{ request.session.shopinfo.name }}</span><span style="font-size:14px;">({{ request.session.shopinfo.shop }})</span></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'web_index' %}">Ordering</a></li>
+            <li><a href="{% url 'web_orders_index' 1 %}?status=1">Waitlist</a></li>
+            <li><a href="{% url 'web_orders_index' 1 %}?status=3">History</a></li>
+            <li><a href="{% url 'web_orders_index' 1 %}?status=2">Invalid</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"> {{request.session.webuser.nickname}}</a></li>
+            <li><a href="{% url 'web_logout'%}">Log out</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <!-- 页头导航结束 -->
+
+    <!-- 页面主体开始 -->
+    <div class="container">
+        <div class="col-md-4">
+            <div class="panel panel-warning">
+                <div class="panel-heading"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart </div>
+                <table class="table table-striped">
+                        <tr>
+                            <th width="30">Order</th>
+                            <th>Product</th>
+                            <th width="72">Quantity</th>
+                            <th width="45">Price</th>
+                            <th>Del</th>
+                        </tr>
+                        {% for product in request.session.cartlist.values %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{ product.name }}</td>
+                            <td class="num">
+                                <i onclick="window.location='{% url 'web_cart_change' %}?pid={{product.id}}&num={{product.num|add:-1}}'" class="btn btn-default btn-xs"> - </i><span>
+                                {{product.num}}
+                                </span><i onclick="window.location='{% url 'web_cart_change' %}?pid={{product.id}}&num={{product.num|add:1}}'" class="btn btn-default btn-xs"> + </i>
+                            </td>
+                            <td class="price">{{ product.price }}</td>
+                            <td><a href="{% url 'web_cart_del' product.id %}" class="btn btn-danger btn-xs" role="button">Del</a></td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+
+                    <li class="list-group-item">
+                        <b>Purchase: &nbsp; </b>
+                        <input type="radio" name="ptype" checked value="1"> Dine in &nbsp;
+                        <input type="radio" name="ptype" value="2"> Packing &nbsp;
+                    </li>
+                    <li class="list-group-item">
+                        <b>Payment: &nbsp; </b>
+                        <input type="radio" name="bank" checked value="1"> Cash &nbsp;
+                        <input type="radio" name="bank" value="2">  Alipay&nbsp;
+                        <input type="radio" name="bank" value="3"> Wechat
+                    </li>
+
+                    <div class="panel-footer" style="height:50px">
+                        <div style="width:120px;float:left;margin:5px 0px;">Account：￥<span style="color:red;font-weight:bold;">{{ request.session.total_money }}</span></div>
+                        <button type="submit" class="btn btn-warning" onclick="dosubmit()" style="width:130px;float:right">Balance</button>
+                        <a type="button" class="btn btn-danger" onclick="window.location='{%url 'web_cart_clear'%}'" style="width:60px;float:left">Clear</a>
+                    </div>
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <!--标签页内容-->
+            {% for category in request.session.categorylist.values %}
+            <h5 style="padding-bottom:9px;border-bottom:1px solid #eee;color:#BB3D00"><span class="glyphicon glyphicon-list" aria-hidden="true"> {{ category.name }}：</h5>
+            <div class="row shoplist">
+                {% for product in category.pids %}
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                      <img src="{% static 'uploads/product'%}/{{product.cover_pic}}" width="150" alt="...">
+                      <div class="caption">
+                        <h6>{{ product.name }}</h6>
+                        <div class="bn">￥<span class="price">{{ product.price }}</span>RMB</a>
+                        <a href="{% url 'web_cart_add' product.id %}" class="btn btn-warning btn-xs pull-right" role="button"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add</a></div>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+    <!-- 页面主体结束 -->
+
+    <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+        //执行订单处理
+        function dosubmit(){
+            //判断购物车中是否有菜品
+            if($("table.table-striped tr").length==1){
+                alert("购物车没有菜品信息！");
+                return;
+            }
+            //询问是否提交订单
+            if(!window.confirm("确定要进行结算？")){
+                return;
+            }
+            //获取要提交的数据,购买方式ptype和支付方式bank，别的数据都在session.cartlist中
+            var ptype = $("input[name='ptype']:checked").val();
+            var bank = $("input[name='bank']:checked").val();
+            //执行ajax提交订单
+            $.ajax({
+                type:"get",
+                url:"{% url 'web_orders_insert' %}",
+                dataType:"text",
+                data:{ptype:ptype,bank:bank},
+                success:function(res){
+                    if(res == "Y"){
+                        alert("订单添加成功！");
+                        window.location.href = "{% url 'web_index' %}";
+                    }else{
+                        alert("订单添加失败！");
+                    }
+                },
+
+            });
+        }
+
+    </script>
+
+</body>
+</html>

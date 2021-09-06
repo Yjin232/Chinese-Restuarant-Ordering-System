@@ -1,0 +1,59 @@
+{% extends 'mobile/base.html' %}
+{% load static from staticfiles %}
+
+
+
+{% block mainbody %}
+<!--头部-->
+	<header>
+		<div class="header">
+			<h1>Login/Register</h1>
+			<a href="#" class="return"><i></i></a>
+		</div>
+	</header>
+
+	<!--内容区-->
+	<article class="main-container loginContent">
+	<form action="{%url 'mobile_doregister' %}" method="post">
+		{% csrf_token %}
+		<div class="list">
+			<ul class="line">
+				<li><i class="icon-head"></i><input type="text" name='mobile' id="name" placeholder="Phone Number"></li>
+				<li class="code"><i class="icon-sms"></i><input type="tel" name='code' id="code" placeholder="Code"><button>Click</button></li>
+			</ul>
+		</div>
+
+		<div class="button"><button type="submit">Login</button></div>
+	</form>
+		<div style="text-align:center;padding:10px">Testing Code：1234</div>
+		<div style="text-align:center;padding:10px;color:#f00;">{{info}}</div>
+		</br><a href="{% url 'myadmin_login'%}" >To Back-stage Mangement</a>
+		</br><a href="{% url 'web_login'%}" >To Lobby order interface</a>
+	</article>
+
+{% endblock %}
+
+{% block myjavascript %}
+<script type="text/javascript">
+	$("button:contains('点击获取')").click(function(){
+		bt = $(this);
+		if(bt.html() != "点击获取"){
+			return;
+		}
+		var phone = $("#name").val();
+		//$.get();
+		bt = $(this);
+		var t=60;
+		bt.html(t+"秒")
+		var mytime = setInterval(function(){
+			t= t-1;
+			bt.html(t+"秒")
+			if(t <= 0){
+				clearInterval(mytime)
+				bt.html("点击获取");
+			}
+		},1000);
+
+	});
+</script>
+{% endblock %}

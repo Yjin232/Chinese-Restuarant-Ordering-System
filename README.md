@@ -1,5 +1,5 @@
-##Author: Yicheng Jin
-##Date: 2021/9/5
+# Author: Yicheng Jin  Date: 2021/9/5
+
 # Chinese-Restuarant-Ordering-System
 The ordering system consists of three modules: back-end management system, lobby ordering homepage and mobile catering interface. 
 Realized Functions: 
@@ -8,13 +8,15 @@ Realized Functions:
 3) mobile catering interface, realized the function of personal center and view past orders, through the mobile phone number and verification code to achieve membership login, and can use the mobile phone to place orders.
 
 # Instructions
-Back-end Language: Python 3.5.3
-Project Framework: Django 2.2.24
-Database: MySQL
+1) Back-end Language: Python 3.5.3
+2) Project Framework: Django 2.2.24
+3) Database: MySQL 8.0.21
 
 # Step
 1) Download all files under "Chinese_Restuarant_Ordering_System" 
 2) Create a local database on your MySQL, named "osdb", The base character set is "utf8" and Database collation is "utf8_general_ci"
 3) Then execute the SQL script "osdb_data.sql" against the database "OSDB"
 4) Open the CMD or SHELL in the directory of the file "manage.py"
-5) 
+5) Use this link(http://localhost:8000/) in your browser Entering the backend management system
+
+# Thanks! 

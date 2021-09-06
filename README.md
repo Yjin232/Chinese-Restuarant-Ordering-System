@@ -13,6 +13,8 @@ Project Framework: Django 2.2.24
 Database: MySQL
 
 # Step
-1) 
-2)
-3)
+1) Download all files under "Chinese_Restuarant_Ordering_System" 
+2) Create a local database on your MySQL, named "osdb", The base character set is "utf8" and Database collation is "utf8_general_ci"
+3) Then execute the SQL script "osdb_data.sql" against the database "OSDB"
+4) Open the CMD or SHELL in the directory of the file "manage.py"
+5) 

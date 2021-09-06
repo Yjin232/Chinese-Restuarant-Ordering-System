@@ -7,3 +7,10 @@ Realized Functions: (1) back-end management system for staff information, orders
 (3) mobile catering interface, realized the function of personal center and view past orders, through the mobile phone number and verification code to achieve membership login, and can use the mobile phone to place orders.
 
 # Instructions
+Back-end Language: Python 3.5.3
+Project Framework: Django 2.2.24
+Database: MySQL
+
+# Step
+1)
+2)

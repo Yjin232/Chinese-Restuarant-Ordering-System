@@ -19,4 +19,4 @@ Realized Functions:
 4) Open the CMD or SHELL in the directory of the file "manage.py"
 5) Use this link(http://localhost:8000/) in your browser Entering the backend management system
 
-# Thanks! 
+# The template file of the project comes from the Internet, and the background file is written by the author himself, If there is infringement, please contact me! Thanks!

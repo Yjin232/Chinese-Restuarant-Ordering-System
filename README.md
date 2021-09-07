@@ -1,4 +1,4 @@
-# Author: Yicheng Jin  Date: 2021/9/5
+# Author: Yicheng Jin  Update: 2021/8/10
 
 # Chinese-Restuarant-Ordering-System
 The ordering system consists of three modules: back-end management system, lobby ordering homepage and mobile catering interface. 

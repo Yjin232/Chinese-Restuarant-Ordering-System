@@ -17,7 +17,7 @@ Realized Functions:
 2) Create a local database on your MySQL, named "osdb", The base character set is "utf8" and Database collation is "utf8_general_ci"
 3) Then execute the SQL script "osdb_data.sql" against the database "osdb"
 4) Open the CMD or SHELL in the directory of the file "manage.py"
-5) Type "python manage.py runserver" to install this project
+5) Type "python manage.py runserver" to launch this project
 6) Use this link(http://localhost:8000/) in your browser Entering the backend management system
 7) The first screen you will see is the lobby ordering screen. And use the link on the page to enter the back-end management or mobile terminal!
 

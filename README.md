@@ -1,6 +1,6 @@
 # Author: Yicheng Jin  Update: 2021/8/10
 
-# Web demo URI: (the server is based on cloud, sometimes may not open)
+# Web demo URI: http://120.25.217.202:5656/ (the server is based on cloud, sometimes may not open)
 
 # Chinese-Restuarant-Ordering-System
 The ordering system consists of three modules: back-end management system, lobby ordering homepage and mobile catering interface. 
